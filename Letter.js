@@ -8,9 +8,20 @@ var lowerFullWord = "Banana Pancakes";
 var fullWord = lowerFullWord.toUpperCase().split("");
 //var wordArray = fullWord.split("");
 var userGuess = process.argv[2].toUpperCase();
+var emptyWord = [];
+
+for (i = 0; i < fullWord.length; i++){
+    if (fullWord[i] === " "){
+        emptyWord.push(fullWord[i]);
+    }else{
+        emptyWord.push("_"); 
+    }
+    
+}
 
 // if(fullWord.indexOf(this.letterGuess) > -1){
 console.log(fullWord);
+console.log(emptyWord);
 
 function Letter(letterGuess, ifAccurate, letterSpace){ 
     this.letterGuess = letterGuess;
@@ -29,6 +40,8 @@ function Letter(letterGuess, ifAccurate, letterSpace){
                 console.log(letterLocation);
                 this.ifAccurate = 1;
                 this.letterSpace = userGuess;
+                emptyWord.splice(letterLocation, 1, fullWord[x]);
+                console.log(emptyWord);
                 console.log(this.ifAccurate);
                 console.log(this.letterSpace);
             } else {
