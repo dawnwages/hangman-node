@@ -4,58 +4,44 @@
 // ifAccurate takes the character as an argument and checks it against the underlying character
 //fullWord = the word that the user is guessing against. This should be designed in a different document
 
-var lowerFullWord = "Banana Pancakes";
-var fullWord = lowerFullWord.toUpperCase().split("");
 //var wordArray = fullWord.split("");
-var userGuess = process.argv[2].toUpperCase();
-var emptyWord = [];
+//var userGuess = process.argv[2].toUpperCase();
+//console.log(userGuess);
 
-for (i = 0; i < fullWord.length; i++){
-    if (fullWord[i] === " "){
-        emptyWord.push(fullWord[i]);
-    }else{
-        emptyWord.push("_"); 
-    }
-    
-}
 
 // if(fullWord.indexOf(this.letterGuess) > -1){
-console.log(fullWord);
-console.log(emptyWord);
+//console.log(fullWord);
+//console.log(emptyWord);
 
-function Letter(letterGuess, ifAccurate, letterSpace){ 
-    this.letterGuess = letterGuess;
-    this.ifAccurate = 0;
-    this.letterSpace = "_";
+// The way it is now it will always be true because the userGuess is being checked against the ne
 
-    //function that returns the underlying character if the letter has been guessed or a placeholder if the letter has not been guessed
-    this.letterGame = function() {
-        var letterCount = 0;
-        for( x = 0; x < fullWord.length; x++){    
-            if(this.letterGuess === fullWord[x]) {
-            
-                console.log("correct!");
-                var letterLocation = x;
-                letterCount++
-                console.log(letterLocation);
-                this.ifAccurate = 1;
-                this.letterSpace = userGuess;
-                emptyWord.splice(letterLocation, 1, fullWord[x]);
-                console.log(emptyWord);
-                console.log(this.ifAccurate);
-                console.log(this.letterSpace);
-            } else {
-                //console.log("this letter is not in the word");
-                this.ifAccurate = 0;
-                //console.log(this.ifAccurate);
-                //console.log(this.letterSpace);
-            }
+function Letter(letterCharacter){ 
+    this.letterCharacter = letterCharacter;
+    this.letterPicked = false;
+    this.displayLetter = "_";
+
+    this.letterCheck = function(){
+        if(userGuess === this.letterCharacter) {
+            //console.log(this.letterCharacter);
+            //console.log(userGuess);
+            this.displayLetter = userGuess;
+            this.letterPicked = true;
+            console.log("This is the display letter: "+this.displayLetter);
+            return this.displayLetter;
+        } else {
+            //console.log(this.letterCharacter);
+            //console.log(userGuess);
+            //console.log("This is the display letter: "+this.displayLetter);
+            return this.displayLetter;
         }
-        console.log("you have matched "+letterCount+" letter(s)!");
     }
+    //function that returns the underlying character if the letter has been guessed or a placeholder if the letter has not been guessed
+
 
 }
 
-const testLetter = new Letter(userGuess);
+//const testLetter = new Letter(userGuess);
 
-testLetter.letterGame();
+//testLetter.letterCheck();
+
+module.exports = Letter;
