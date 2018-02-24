@@ -1,3 +1,5 @@
+var inquirer = require("inquirer");
+
 //contains a constructor Letter. This constructor should be able to either display an underlying character if the letter has been guessed, or a placeholder (like an underscore) if the letter has not been guessed.
 
 //userGuess = a string value to store the underlying character for the letter
@@ -21,6 +23,9 @@ function Letter(letterCharacter){
     this.displayLetter = "_";
 
     this.letterCheck = function(){
+
+        //inquire to push to the letter
+
         if(userGuess === this.letterCharacter) {
             //console.log(this.letterCharacter);
             //console.log(userGuess);
@@ -42,6 +47,25 @@ function Letter(letterCharacter){
 
 //const testLetter = new Letter(userGuess);
 
+Letter.prototype.printInfo = function(){
+    console.log(this.letterCharacter);
+};
+
 //testLetter.letterCheck();
+function userGuess() {
+    inquirer.prompt([
+        {
+            name: "letterCharacter",
+            message: "Guess a letter!"
+        }
+    ]).then(function(answers){
+        //initializes the new letter variable
+        var newLetter = new Letter        (answers.letterCharacter);
+        newLetter.printInfo();
+    }); 
+}
+
+//userGuess();
+
 
 module.exports = Letter;
