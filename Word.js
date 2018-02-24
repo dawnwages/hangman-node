@@ -6,8 +6,6 @@ var Letter = require("./Letter.js");
 //var emptyWord = [];
 //var userGuess = process.argv[2].toUpperCase();
 
-console.log(newLetter);
-
 function Word(wordChoice){
     this.wordChoice = wordChoice;
     this.fullWord = wordChoice.toUpperCase().split("");
@@ -82,7 +80,7 @@ function Word(wordChoice){
 
 //const testWord = new Word("Banana Pancakes");
 
-//testWord.wordGame();
+testWord.wordGame();
 //testWord.letterGame();
 
 

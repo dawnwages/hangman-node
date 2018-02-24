@@ -52,20 +52,9 @@ Letter.prototype.printInfo = function(){
 };
 
 //testLetter.letterCheck();
-function userGuess() {
-    inquirer.prompt([
-        {
-            name: "letterCharacter",
-            message: "Guess a letter!"
-        }
-    ]).then(function(answers){
-        //initializes the new letter variable
-        var newLetter = new Letter        (answers.letterCharacter);
-        newLetter.printInfo();
-    }); 
-}
 
-//userGuess();
+
+
 
 
 module.exports = Letter;
