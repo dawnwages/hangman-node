@@ -17,29 +17,36 @@ var inquirer = require("inquirer");
 
 // The way it is now it will always be true because the userGuess is being checked against the ne
 
-function Letter(letterCharacter){ 
+var Letter = function(letterCharacter, letterPicked){ 
     this.letterCharacter = letterCharacter;
-    this.letterPicked = false;
+    this.letterPicked = letterPicked;
     this.displayLetter = "_";
 
-    this.letterCheck = function(){
-
-        //inquire to push to the letter
-
-        if(userGuess === this.letterCharacter) {
-            //console.log(this.letterCharacter);
-            //console.log(userGuess);
-            this.displayLetter = userGuess;
-            this.letterPicked = true;
-            console.log("This is the display letter: "+this.displayLetter);
-            return this.displayLetter;
-        } else {
-            //console.log(this.letterCharacter);
-            //console.log(userGuess);
-            //console.log("This is the display letter: "+this.displayLetter);
-            return this.displayLetter;
-        }
+    if(this.letterPicked){
+        this.displayLetter = this.letterCharacter;
+    } else {
+        this.displayLetter = "_";
     }
+
+    //console.log(this.displayLetter);
+    // this.letterCheck = function(){
+
+    //     //inquire to push to the letter
+
+    //     if(userGuess === this.letterCharacter) {
+    //         //console.log(this.letterCharacter);
+    //         //console.log(userGuess);
+    //         this.displayLetter = userGuess;
+    //         this.letterPicked = true;
+    //         console.log("This is the display letter: "+this.displayLetter);
+    //         return this.displayLetter;
+    //     } else {
+    //         //console.log(this.letterCharacter);
+    //         //console.log(userGuess);
+    //         //console.log("This is the display letter: "+this.displayLetter);
+    //         return this.displayLetter;
+    //     }
+    // }
     //function that returns the underlying character if the letter has been guessed or a placeholder if the letter has not been guessed
 
 
@@ -47,9 +54,7 @@ function Letter(letterCharacter){
 
 //const testLetter = new Letter(userGuess);
 
-Letter.prototype.printInfo = function(){
-    console.log(this.letterCharacter);
-};
+
 
 //testLetter.letterCheck();
 
