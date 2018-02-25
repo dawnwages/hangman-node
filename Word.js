@@ -31,7 +31,7 @@ var Word = function(wordChoice){
             return this.displayLetter;
         };
 
-        console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+       // console.log("this should be all of the letter objects: "+emptyWord.join(" "));
     };
 
     this.createLetters();
@@ -60,8 +60,9 @@ var updateCheckLetter = function () {
                 console.log(emptyWord[l].letterCharacter+" did not match");
             }
         }
-        console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+        console.log("line 63 this should be all of the letter objects: "+emptyWord.join(" "));        
         updateCheckLetter();
+                
     });
 
 };
@@ -70,7 +71,7 @@ var updateCheckLetter = function () {
     //     console.log(emptyWord[l].letterCharacter);
     // }
 };
-
+console.log("line 74 this should be all of the letter objects: "+emptyWord.join(" "));
 updateCheckLetter();
 
 module.exports = Word;
