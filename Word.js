@@ -1,6 +1,7 @@
 
 var Letter = require("./Letter.js");
-var inquirer = require("inquirer");
+//var inquirer = require("inquirer");
+inquirer.registerPrompt('recursive', require('inquirer-recursive'));
 var emptyWord = [];
 var wordLength = 0;
 //var emptyWord = [];
@@ -34,12 +35,20 @@ var Word = function(wordChoice){
     };
 
     this.updateCheckLetter = function () {
-
+        var c = 0;
+       while ( c < 1 ){ 
+        c++;
         inquirer.prompt([{
-            name: "letterCharacter",
-            message: "Guess a letter!",
-        }   
-        ]).then(function(answers){
+            type: 'recursive',
+            message: 'Guess the words',
+            name: 'letterGuess',
+            prompts: [{
+                        type: 'input',
+                        name: 'letterCharacter',
+                        message: 'Guess a letter!',
+            }]
+
+        }]).then(function(answers){
             console.log("You picked :"+answers.letterCharacter);
             for (l = 0; l < emptyWord.length; l++){
                 if(emptyWord[l].letterCharacter === answers.letterCharacter){
@@ -54,6 +63,7 @@ var Word = function(wordChoice){
             console.log("this should be all of the letter objects: "+emptyWord.join(" "));
         });
 
+    };
         // for ( l = 0; l < emptyWord.length; l++){
         //     //console.log(emptyWord[l].displayLetter);
         //     console.log(emptyWord[l].letterCharacter);
