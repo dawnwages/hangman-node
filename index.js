@@ -1,5 +1,5 @@
 var Word = require("./Word.js");
-var inquirer = require("inquirer");
+
 //random word is global because it will reassign the word when the game is restart
 var randomWord;
 
@@ -16,7 +16,7 @@ var wordArray = [
 function startGame() {
     
     pickWord();
-    console.log(randomWord);
+    //console.log(randomWord);
 
     // creates printInfo method that applies to the newly created word and will be used to print game status
     // Word.prototype.printInfo = function(){
@@ -25,18 +25,19 @@ function startGame() {
 
 
 }
+// function playGame() {
+//     console.log("access letter from index.js so I can manipulate it with correct guess");
+//     //console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+// }
 
 //pick new word
 function pickWord() {
     randomWord = new Word(wordArray[Math.floor(Math.random()*wordArray.length)]);
 }
 
-function playGame() {
-    console.log("access letter from index.js so I can manipulate it with correct guess");
-    //console.log("this should be all of the letter objects: "+emptyWord.join(" "));
-}
+
 
 startGame();
-playGame();
+//playGame();
 
 

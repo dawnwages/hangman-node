@@ -2,123 +2,69 @@
 var Letter = require("./Letter.js");
 var inquirer = require("inquirer");
 var emptyWord = [];
-
-//var lowerFullWord = "Banana Pancakes";
-//var fullWord = lowerFullWord.toUpperCase().split("");
+var wordLength = 0;
 //var emptyWord = [];
-//var userGuess = process.argv[2].toUpperCase();
 
 var Word = function(wordChoice){
     this.wordChoice = wordChoice;
     this.fullWord = wordChoice.toUpperCase().split("");
     //this.emptyWord = [];
-    this.wordLength = wordChoice.length;
     this.successGuess = 0;
 
+    wordLength = wordChoice.length;
+    this.createLetters = function() {
 
-    Letter.prototype.toString = function(){
-        // console.log("this is the printed info : "+this.letterCharacter);     
-            
+        for (i = 0; i < this.fullWord.length; i++){
+            if (this.fullWord[i] === " "){
+                emptyWord.push(new Letter(this.fullWord[i], true));
+                
+                //we're using this variable so we can track when we are complete. These are all of the letters e
+                wordLength--;
+            }else{
+                emptyWord.push(new Letter(this.fullWord[i], false));
+                
+            }
+        }
+
+        Letter.prototype.toString = function(){     
             return this.displayLetter;
         };
 
+        console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+    };
 
-    for (i = 0; i < this.fullWord.length; i++){
-        if (this.fullWord[i] === " "){
-            emptyWord.push(new Letter(this.fullWord[i], true));
-            //this.emptyWord.push(this.fullWord[i]);
-            //we're using this variable so we can track when we are complete. These are all of the letters e
-            this.wordLength--;
-        }else{
-            emptyWord.push(new Letter(this.fullWord[i], false));
-            //this.emptyWord.push("_"); 
-        }
-    }
-    console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+    this.updateCheckLetter = function () {
 
-    this.startLoop = function(){
-        if (this.wordLength > 0){
-            inquirer.prompt([
-                {
-                    name: "letterCharacter",
-                    message: "Guess a letter!",
+        inquirer.prompt([{
+            name: "letterCharacter",
+            message: "Guess a letter!",
+        }   
+        ]).then(function(answers){
+            console.log("You picked :"+answers.letterCharacter);
+            for (l = 0; l < emptyWord.length; l++){
+                if(emptyWord[l].letterCharacter === answers.letterCharacter){
+                    emptyWord[l].letterPicked = true;
+                    emptyWord[l].displayLetter = answers.letterCharacter;
+                    console.log("updated letter Character: "+answers.letterCharacter);
+                    console.log("updated display letter: "+emptyWord[l].displayLetter);
+                } else {
+                    console.log(emptyWord[l].letterCharacter+" did not match");
                 }
-            ]).then(function(answers){
-                this.wordLength--;
-                console.log(wordLength);
-            })
-        }
-    }
+            }
+            console.log("this should be all of the letter objects: "+emptyWord.join(" "));
+        });
 
-    this.startLoop();
-    //Letter.printInfo();
+        // for ( l = 0; l < emptyWord.length; l++){
+        //     //console.log(emptyWord[l].displayLetter);
+        //     console.log(emptyWord[l].letterCharacter);
+        // }
+    };
 
-   //console.log("this is the displayWord :"+this.emptyWord[1][0]);
-
-    // this.addLetterGuess = function(userGuess){
-    //         inquirer.prompt([
-    //             {
-    //                 name: "letterCharacter",
-    //                 message: "Guess a letter!"
-    //             }
-    //         ]).then(function(answers){
-    //             //initializes the new letter variable
-                
-    //             newLetter.printInfo();
-    //         }); 
-    // }
-    
-    
-    // this.wordGame = function(){
-    //     var incorrectGuess = 0;
-    //     userGuess();
-
-    //     // while(this.wordLength > this.successGuess){
-    //     //     console.log(this.emptyWord.join(" "));
-    //     //     if (i === 3) {
-    //     //         break;
-    //     //     }
-    //     // } 
-        
-    // }
-
-    // this.letterGame = function() {
-    //     var letterCount = 0;
-    //     for( x = 0; x < this.fullWord.length; x++){    
-    //         if(userGuess === this.fullWord[x]) {
-            
-    //             console.log("correct!");
-    //             var letterLocation = x;
-    //             letterCount++
-    //             console.log(letterLocation);
-    //             this.ifAccurate = 1;
-    //             this.letterSpace = userGuess;
-    //             this.emptyWord.splice(letterLocation, 1, this.fullWord[x]);
-    //            // console.log(this.emptyWord);
-    //            // console.log(this.ifAccurate);
-    //            // console.log(this.letterSpace);
-    //         } else {
-    //             //console.log("this letter is not in the word");
-    //             this.ifAccurate = 0;
-    //             //console.log(this.ifAccurate);
-    //             //console.log(this.letterSpace);
-    //         }
-    //     }
-    //     console.log("you have matched "+letterCount+" letter(s)!");
-    // }
-    
-        
-
+    this.createLetters();
+    this.updateCheckLetter();
 
 }
 
-//const testWord = new Word("Banana Pancakes");
-
-//testWord.wordGame();
-//testWord.letterGame();
-
-
-//This creates a function so we can print each letter
 
 
 module.exports = Word;
