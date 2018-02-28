@@ -1,4 +1,4 @@
-var inquirer = require("inquirer");
+
 
 //contains a constructor Letter. This constructor should be able to either display an underlying character if the letter has been guessed, or a placeholder (like an underscore) if the letter has not been guessed.
 

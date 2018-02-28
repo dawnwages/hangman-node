@@ -1,10 +1,9 @@
 
-var Letter = require("./Letter.js");
-var inquirer = require("inquirer");
+const Letter = require("./Letter.js");
+const inquirer = require("inquirer");
 //inquirer.registerPrompt('recursive', require('inquirer-recursive'));
 var emptyWord = [];
 var wordLength = 0;
-//var emptyWord = [];
 
 var Word = function(wordChoice){
     this.wordChoice = wordChoice;
@@ -21,9 +20,10 @@ var Word = function(wordChoice){
                 
                 //we're using this variable so we can track when we are complete. These are all of the letters e
                 wordLength--;
+                //console.log("pushing a blank to emptyWord");
             }else{
                 emptyWord.push(new Letter(this.fullWord[i], false));
-                
+                //console.log("pushing a letter to emptyWord");
             }
         }
 
@@ -36,13 +36,30 @@ var Word = function(wordChoice){
 
     this.createLetters();
     //this.updateCheckLetter(); // No longer need this because we are taking this out of the constructor -- I don't think we have any need for "this" either. We want to keep it on this page so we can communicate with the letter constructor. I guess we can call it on the index page maybe?
+        
+      
+        // var g = 0;
+        // if (g < 5){
+        //     g++;
+        //     console.log(g+" chances")
+        //    // this.updateCheckLetter();
+        // } else {
+        //     console.log("Your turn is over");
+        // }
+      
+        //this.updateCheckLetter();
 
+}
+
+
+if (emptyWord.length === 0){
+    console.log("Start the Hangman Game!");
+} else {
+    console.log("line 74 this should be all of the letter objects: "+emptyWord.join(" "));
 }
 
 var updateCheckLetter = function () {
     var c = 0;// c will need to be changed to word length, but this is just to keep it under control for now.
-   if ( c < 3 ){ 
-    c++;
     inquirer.prompt([     
         {
                     name: 'letterCharacter',
@@ -58,20 +75,25 @@ var updateCheckLetter = function () {
                 console.log("updated display letter: "+emptyWord[l].displayLetter);
             } else {
                 console.log(emptyWord[l].letterCharacter+" did not match");
-            }
+            }  
         }
-        console.log("line 63 this should be all of the letter objects: "+emptyWord.join(" "));        
-        updateCheckLetter();
+       console.log("line 63 this should be all of the letter objects: "+emptyWord.join(" "));        
+       if(c < 3){
+           c++;
+           updateCheckLetter();
+       } else {
+           console.log("done");
+       }
                 
     });
 
-};
     // for ( l = 0; l < emptyWord.length; l++){
     //     //console.log(emptyWord[l].displayLetter);
     //     console.log(emptyWord[l].letterCharacter);
     // }
 };
-console.log("line 74 this should be all of the letter objects: "+emptyWord.join(" "));
+
+
 updateCheckLetter();
 
 module.exports = Word;

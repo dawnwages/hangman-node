@@ -1,3 +1,8 @@
+
+console.log('\nWelcome to Hangman!\n');
+console.log('---------------------------------');
+console.log('Created by Dawn, with love <3')
+console.log('---------------------------------\n');
 var Word = require("./Word.js");
 
 //random word is global because it will reassign the word when the game is restart
@@ -11,11 +16,18 @@ var wordArray = [
     "Waiting On The World To Change",
 ]
 
-//console.log(emptyWord);
+//pick new word
+function pickWord() {
+    
+    randomWord = new Word(wordArray[Math.floor(Math.random()*wordArray.length)]);
+}
+pickWord();
 
 function startGame() {
     
-    pickWord();
+    
+    
+    
     //console.log(randomWord);
 
     // creates printInfo method that applies to the newly created word and will be used to print game status
@@ -30,10 +42,7 @@ function startGame() {
 //     //console.log("this should be all of the letter objects: "+emptyWord.join(" "));
 // }
 
-//pick new word
-function pickWord() {
-    randomWord = new Word(wordArray[Math.floor(Math.random()*wordArray.length)]);
-}
+
 
 
 
