@@ -13,9 +13,11 @@ var updateCheckLetter = function () {
                     message: 'Guess a letter!',
         }
     ]).then(function(answers){
-        console.log("You picked :"+answers.letterCharacter);
+        //DAWN!!! YOU NEED TO ADD LOGIC IN THERE SAYING "NO YOU"VE ALREADY GUESSED THIS LETTER!
+        //************** DONT FORGET TO FIX! *****************/
+        //console.log("You picked :"+answers.letterCharacter);
         for (l = 0; l < emptyWord.length; l++){
-            if(emptyWord[l].letterCharacter === answers.letterCharacter){
+            if(emptyWord[l].letterCharacter === answers.letterCharacter && emptyWord[l].letterPicked === false){
                 emptyWord[l].letterPicked = true;
                 emptyWord[l].displayLetter = answers.letterCharacter;
                 wordLength--;
